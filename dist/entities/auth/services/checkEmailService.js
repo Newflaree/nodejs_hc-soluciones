@@ -9,36 +9,29 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// Modules
-const modules_1 = require("../modules");
+// Models
+const models_1 = require("../models");
+// Config
+const config_1 = require("../../../config");
 // Utils
 const utils_1 = require("../../../utils");
 /**
- * Handler description
+ * Service Desciption
  *
- * PATH: /api/auth/register
- * AUTH-REQUIRED: false
- * ADMIN-REQUIRED: false
- *
- * @param { Object } req - The HTTP request object.
- * @param { Object } res - The HTTP response object.
- * @returns { void }
+ * @param {String} email - Express request object containing query parameters
+ * @returns {Object} - An object containing the total count of products and an array of products
  */
-const authRegisterController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const checkEmailService = (email) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { statusCode, ok, error, } = yield (0, modules_1.authRegisterModule)(req);
-        res.status(statusCode).json({
-            ok,
-            error
-        });
+        yield config_1.db.connect();
+        const emailExists = yield models_1.User.findOne({ email });
+        yield config_1.db.disconnect();
+        return (emailExists) ? true : false;
     }
     catch (error) {
-        utils_1.logger.consoleErrorsHandler(error, 'authRegisterController');
-        res.status(500).json({
-            ok: false,
-            message: 'Something went wrong. Talking the Administrator'
-        });
+        yield config_1.db.disconnect();
+        utils_1.logger.consoleErrorsHandler(error, 'checkEmailService');
     }
 });
-exports.default = authRegisterController;
-//# sourceMappingURL=authRegisterController.js.map
+exports.default = checkEmailService;
+//# sourceMappingURL=checkEmailService.js.map

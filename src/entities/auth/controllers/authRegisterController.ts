@@ -23,14 +23,13 @@ const authRegisterController = async (
 ): Promise<void> => {
   try {
     const {
+      statusCode,
       ok,
-      message,
       error,
     } = await authRegisterModule( req );
 
-    res.status( 201 ).json({
+    res.status( statusCode ).json({
       ok,
-      message,
       error
     });
 
