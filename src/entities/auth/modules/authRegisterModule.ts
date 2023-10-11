@@ -14,7 +14,19 @@ import {
 import { generateJWT } from '../../../utils';
 
 
-// TODO: Write Doc for this authRegisterModule
+/**
+ * Registers a new user in the system. This module handles the registration process,
+ * including email validation, password encryption, and JWT token generation.
+ *
+ * PATH: `/api/auth/register`
+ * AUTH-REQUIRED: No (Authentication is not required for user registration)
+ * ADMIN-REQUIRED: No (Admin privileges are not required for user registration)
+ *
+ * @param {Object} req - The HTTP request object containing user registration data.
+ * @returns {Promise<AuthMoludeReturn>} A Promise that resolves to an authentication result
+ * for the newly registered user, including the HTTP status code, success status,
+ * user information, and an authentication token.
+ */
 const authRegisterModule = async (
   req: Request
 ): Promise<AuthMoludeReturn> => {
