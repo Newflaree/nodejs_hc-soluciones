@@ -12,13 +12,17 @@ import { logger } from '../../../utils';
  * @param {String} email - Express request object containing query parameters
  * @returns {Object} - An object containing the total count of products and an array of products
  */
-const checkEmailService = async ( email: string ): Promise<boolean | undefined> => {
+const checkEmailService = async (
+  email: string
+): Promise<boolean | undefined> => {
   try {
     await db.connect();
     const emailExists = await User.findOne({ email });
     await db.disconnect();
-    
-    return ( emailExists ) ? true : false;
+
+    return ( emailExists )
+      ? true
+      : false;
 
   } catch ( error ) {
     await db.disconnect();

@@ -2,42 +2,56 @@
 import { Request } from 'express';
 // DB Config
 import { db } from '../../../config';
-// Models
-import { User } from '../models';
-import {checkEmailService} from '../services';
+// Interfaces
+import { AuthMoludeReturn } from '../interfaces';
+// Services
+import {
+  checkEmailService,
+  createNewUserService,
+  encryptPasswordService
+} from '../services';
+// Utils
+import { generateJWT } from '../../../utils';
 
-const authRegisterModule = async ( req: Request ) => {
+
+// TODO: Write Doc for this authRegisterModule
+const authRegisterModule = async (
+  req: Request
+): Promise<AuthMoludeReturn> => {
   const {
     name,
     email,
     password,
   } = req.body;
 
-  const newUserData = {
-    name,
-    email,
-    password
-  };
-
   try {
-    // TODO: Check if email exists
+    // Check if email exists
     const emailExists = await checkEmailService( email );
 
     if ( emailExists ) return {
       statusCode: 400,
       ok: false,
-      message: 'El correo ya existe'
+      message: 'Este correo electrónico ya está registrado'
     }
 
-    // TODO: Encrypt password
-    // TODO: Save to DB
-    // TODO: Geerate JWT
+    // Encrypt password
+    const newUserData = await encryptPasswordService({
+      name,
+      email,
+      password
+    });
 
-    const newUser = new User( newUserData );
+    // Create new User
+    const newUser = await createNewUserService( newUserData );
+
+    // implementate GeerateJWT
+    const token = await generateJWT( newUser._id );
 
     return {
       statusCode: 201,
       ok: true,
+      newUser,
+      token
     }
   
   } catch ( error ) {

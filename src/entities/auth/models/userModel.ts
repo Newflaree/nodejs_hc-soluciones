@@ -32,7 +32,7 @@ const UserSchema = new Schema<UserProps>({
     type: Boolean,
     default: false
   },
-  status: {
+  isActive: {
     type: Boolean,
     default: true
   },

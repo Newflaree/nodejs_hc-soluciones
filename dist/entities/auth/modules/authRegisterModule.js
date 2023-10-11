@@ -11,32 +11,37 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 // DB Config
 const config_1 = require("../../../config");
-// Models
-const models_1 = require("../models");
+// Services
 const services_1 = require("../services");
+// Utils
+const utils_1 = require("../../../utils");
+// TODO: Write Doc for this authRegisterModule
 const authRegisterModule = (req) => __awaiter(void 0, void 0, void 0, function* () {
     const { name, email, password, } = req.body;
-    const newUserData = {
-        name,
-        email,
-        password
-    };
     try {
-        // TODO: Check if email exists
+        // Check if email exists
         const emailExists = yield (0, services_1.checkEmailService)(email);
         if (emailExists)
             return {
                 statusCode: 400,
                 ok: false,
-                message: 'El correo ya existe'
+                message: 'Este correo electrónico ya está registrado'
             };
-        // TODO: Encrypt password
-        // TODO: Save to DB
-        // TODO: Geerate JWT
-        const newUser = new models_1.User(newUserData);
+        // Encrypt password
+        const newUserData = yield (0, services_1.encryptPasswordService)({
+            name,
+            email,
+            password
+        });
+        // Create new User
+        const newUser = yield (0, services_1.createNewUserService)(newUserData);
+        // implementate GeerateJWT
+        const token = yield (0, utils_1.generateJWT)(newUser._id);
         return {
             statusCode: 201,
             ok: true,
+            newUser,
+            token
         };
     }
     catch (error) {

@@ -55,7 +55,7 @@ const disconnect = () => __awaiter(void 0, void 0, void 0, function* () {
             return;
         yield mongoose_1.default.disconnect();
         mongoConnection.isConnected = 0;
-        console.log(`${'[CONFIG.DATABASE.DISCONNECT]'.bgGreen}: Disconnected from MongoDB`);
+        console.log(`${'[CONFIG.DATABASE.DISCONNECT]'.bgGreen}: Disconnected from Database`);
     }
     catch (error) {
         yield mongoose_1.default.disconnect();

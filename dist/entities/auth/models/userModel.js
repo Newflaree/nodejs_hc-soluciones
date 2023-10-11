@@ -42,7 +42,7 @@ const UserSchema = new mongoose_1.Schema({
         type: Boolean,
         default: false
     },
-    status: {
+    isActive: {
         type: Boolean,
         default: true
     },

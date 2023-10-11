@@ -26,9 +26,12 @@ const utils_1 = require("../../../utils");
  */
 const authRegisterController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { statusCode, ok, error, } = yield (0, modules_1.authRegisterModule)(req);
+        const { statusCode, ok, newUser, message, token, error, } = yield (0, modules_1.authRegisterModule)(req);
         res.status(statusCode).json({
             ok,
+            newUser,
+            message,
+            token,
             error
         });
     }

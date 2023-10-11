@@ -1,6 +1,6 @@
 export const listenServerLogger = ( port: string ) => {
   console.clear();
-  console.log( `${ '[SERVER.LISTEN]:'.green } Listening on port: ${ port.green }` );
+  console.log( `${ '[SERVER.LISTEN]:'.green } Server listening on port: ${ port.green }` );
 }
 
 export const consoleErrorsHandler = ( error: unknown, fileName: string ) => {

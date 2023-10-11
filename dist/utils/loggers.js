@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.consoleErrorsHandler = exports.listenServerLogger = void 0;
 const listenServerLogger = (port) => {
     console.clear();
-    console.log(`${'[SERVER.LISTEN]:'.green} Listening on port: ${port.green}`);
+    console.log(`${'[SERVER.LISTEN]:'.green} Server listening on port: ${port.green}`);
 };
 exports.listenServerLogger = listenServerLogger;
 const consoleErrorsHandler = (error, fileName) => {

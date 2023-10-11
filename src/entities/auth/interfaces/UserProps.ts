@@ -6,7 +6,8 @@ export interface UserProps {
   role: Roles;
   google: boolean;
   apple: boolean;
-  status: boolean;
+  isActive: boolean;
 }
+
 
 type Roles = 'USER_ROLE' | 'ADMIN_ROLE'

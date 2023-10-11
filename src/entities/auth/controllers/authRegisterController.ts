@@ -1,5 +1,8 @@
 // Express
-import { Request, Response } from 'express';
+import {
+  Request,
+  Response
+} from 'express';
 // Modules
 import { authRegisterModule } from '../modules';
 // Utils
@@ -25,14 +28,19 @@ const authRegisterController = async (
     const {
       statusCode,
       ok,
+      newUser,
+      message,
+      token,
       error,
     } = await authRegisterModule( req );
 
     res.status( statusCode ).json({
       ok,
+      newUser,
+      message,
+      token,
       error
     });
-
   } catch ( error ) {
     logger.consoleErrorsHandler( error, 'authRegisterController' );
 
