@@ -29,23 +29,54 @@ const UserSchema = new mongoose_1.Schema({
     img: {
         type: String
     },
+    location: {
+        latitude: {
+            type: Number,
+            default: 0
+        },
+        longitude: {
+            type: Number,
+            default: 0
+        }
+    },
+    tags: [{
+            type: String
+        }],
     role: {
         type: String,
-        default: 'USER_ROLE',
-        enum: ['USER_ROLE', 'ADMIN_ROLE']
+        enum: [
+            'USER_ROLE',
+            'NARRATOR_ROLE',
+            'ADMIN_ROLE'
+        ],
+        default: 'USER_ROLE'
     },
-    google: {
+    isBlocked: {
         type: Boolean,
         default: false
     },
-    apple: {
+    isGoogle: {
+        type: Boolean,
+        default: false,
+    },
+    isFacebook: {
         type: Boolean,
         default: false
     },
-    isActive: {
+    isApple: {
         type: Boolean,
-        default: true
+        default: false
     },
+    applicationStatus: {
+        type: String,
+        enum: [
+            'WITHOUT_STATUS',
+            'PENDING_STATUS',
+            'ACTIVE_STATUS',
+            'REJECTED_STATUS'
+        ],
+        default: 'WITHOUT_STATUS'
+    }
 });
 UserSchema.methods.toJSON = function () {
     const _a = this.toObject(), { __v, password, _id } = _a, user = __rest(_a, ["__v", "password", "_id"]);

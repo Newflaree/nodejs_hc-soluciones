@@ -29,7 +29,7 @@ const utils_1 = require("../../../utils");
  * user information, and an authentication token.
  */
 const authRegisterModule = (req) => __awaiter(void 0, void 0, void 0, function* () {
-    const { name, email, password, } = req.body;
+    const { name, email, password, location } = req.body;
     try {
         // Check if email exists
         const emailExists = yield (0, services_1.checkEmailService)(email);
@@ -43,7 +43,8 @@ const authRegisterModule = (req) => __awaiter(void 0, void 0, void 0, function* 
         const newUserData = yield (0, services_1.encryptPasswordService)({
             name,
             email,
-            password
+            password,
+            location
         });
         // Create new User
         const newUser = yield (0, services_1.createNewUserService)(newUserData);

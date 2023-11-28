@@ -34,6 +34,7 @@ const authRegisterModule = async (
     name,
     email,
     password,
+    location
   } = req.body;
 
   try {
@@ -50,7 +51,8 @@ const authRegisterModule = async (
     const newUserData = await encryptPasswordService({
       name,
       email,
-      password
+      password,
+      location
     });
 
     // Create new User
