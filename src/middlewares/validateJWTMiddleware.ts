@@ -27,9 +27,9 @@ export const validateJWTMiddleware = async (
 
   try {
     const { uid }: any  = jwt.verify( token, process.env.SECRET_KEY || '' );
-    const user = await User.findById({ id: uid }) || { isActive: false };
+    const user = await User.findById({ id: uid }) || { isBlocked: true };
 
-    if ( !user || !user.isActive ) return res.status( 401 ).json({
+    if ( !user || !!user.isBlocked ) return res.status( 401 ).json({
       ok: false,
       message: 'Token inválido'
     });

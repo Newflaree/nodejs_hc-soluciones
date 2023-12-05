@@ -28,7 +28,7 @@ const authRegisterController = async (
     const {
       statusCode,
       ok,
-      newUser,
+      User,
       message,
       token,
       error,
@@ -36,7 +36,7 @@ const authRegisterController = async (
 
     res.status( statusCode ).json({
       ok,
-      newUser,
+      User,
       message,
       token,
       error

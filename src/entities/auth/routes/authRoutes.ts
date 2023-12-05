@@ -22,7 +22,11 @@ router.post( '/register', [
 
 
 // PATH: /api/auth/login
-router.post( '/login', authLoginController );
+router.post( '/login', [
+  check( 'email', 'La dirección de correo es un campo requerido' ).isEmail(),
+  check( 'password', 'La contraseña debe ser de mínimo 6 carácteres' ).isLength({ min: 6 }),
+  validateFields
+], authLoginController );
 
 
 export default router;

@@ -56,15 +56,15 @@ const authRegisterModule = async (
     });
 
     // Create new User
-    const newUser = await createNewUserService( newUserData );
+    const User = await createNewUserService( newUserData );
 
     // implementate GeerateJWT
-    const token = await generateJWT( newUser._id );
+    const token = await generateJWT( User._id );
 
     return {
       statusCode: 201,
       ok: true,
-      newUser,
+      User,
       token
     }
   

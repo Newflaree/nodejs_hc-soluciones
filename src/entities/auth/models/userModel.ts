@@ -2,6 +2,7 @@ import { Schema, model } from 'mongoose';
 // Interfaces
 import { UserProps } from '../interfaces';
 
+
 const UserSchema = new Schema<UserProps>({
   name: {
     type: String,

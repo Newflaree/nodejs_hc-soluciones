@@ -5,6 +5,7 @@ import {
 } from "express";
 // Utils
 import {logger} from "../../../utils";
+import authLoginModule from "../modules/authLoginModule";
 
 
 /**
@@ -23,9 +24,19 @@ const authLoginController = async (
   res: Response 
 ): Promise<void> => {
   try {
-    res.status( 200 ).json({
-      ok: true,
-      msg: 'authLoginController'
+    const {
+      statusCode,
+      ok,
+      message,
+      user,
+      token
+    } = await authLoginModule( req )
+
+    res.status( statusCode ).json({
+      ok,
+      message,
+      user,
+      token
     });
   } catch ( error ) {
     logger.consoleErrorsHandler( error, 'authLoginController' );

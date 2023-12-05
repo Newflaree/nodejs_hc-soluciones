@@ -28,8 +28,8 @@ const validateJWTMiddleware = (req, res, next) => __awaiter(void 0, void 0, void
         });
     try {
         const { uid } = jsonwebtoken_1.default.verify(token, process.env.SECRET_KEY || '');
-        const user = (yield models_1.User.findById({ id: uid })) || { isActive: false };
-        if (!user || !user.isActive)
+        const user = (yield models_1.User.findById({ id: uid })) || { isBlocked: true };
+        if (!user || !!user.isBlocked)
             return res.status(401).json({
                 ok: false,
                 message: 'Token inválido'

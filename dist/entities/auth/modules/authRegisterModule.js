@@ -47,13 +47,13 @@ const authRegisterModule = (req) => __awaiter(void 0, void 0, void 0, function* 
             location
         });
         // Create new User
-        const newUser = yield (0, services_1.createNewUserService)(newUserData);
+        const User = yield (0, services_1.createNewUserService)(newUserData);
         // implementate GeerateJWT
-        const token = yield (0, utils_1.generateJWT)(newUser._id);
+        const token = yield (0, utils_1.generateJWT)(User._id);
         return {
             statusCode: 201,
             ok: true,
-            newUser,
+            User,
             token
         };
     }

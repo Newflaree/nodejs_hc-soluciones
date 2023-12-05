@@ -4,7 +4,7 @@ export interface AuthMoludeReturn{
   statusCode: number;
   ok: boolean;
   message?: string;
-  newUser?: UserProps;
+  User?: UserProps;
   token?: unknown | undefined;
   error?: unknown;
 }

@@ -13,22 +13,52 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const config_1 = require("../../../config");
 // Interfaces
 // Services
+const services_1 = require("../services");
+const utils_1 = require("../../../utils");
 // Utils
 // TODO: Write doc for login module
 const authLoginModule = (req
 // TODO: Added auth login response interface
 ) => __awaiter(void 0, void 0, void 0, function* () {
-    // TODO: Defined body parameters for this module
+    // Defined body parameters for this module
+    const { email, password } = req.body;
     try {
-        // TODO: Check if user exists
-        // TODO: Check if user is active
+        // Check if user exists
+        const { user } = yield (0, services_1.findUserByEmailService)(email);
+        if (!user)
+            return {
+                statusCode: 401,
+                ok: false,
+                message: 'Correo electrónico o contraseña incorrectos'
+            };
+        // Check if user is active
+        const userIsBlocked = yield (0, services_1.checkUserBlockedService)(email);
+        if (userIsBlocked)
+            return {
+                statusCode: 401,
+                ok: false,
+                message: 'Correo electrónico o contraseña incorrectos'
+            };
         // TODO: Check if password is valid
+        const validPassword = yield (0, services_1.checkValidPasswordService)(password, user.password);
+        if (!validPassword)
+            return {
+                statusCode: 401,
+                ok: false,
+                message: 'Correo electrónico o contraseña incorrectos'
+            };
         // TODO: Genreate JsonWebToken
-        // TODO: Return { statusCode, ok, validUser, jwt }
+        const token = yield (0, utils_1.generateJWT)(user._id);
+        // Return { statusCode, ok, validUser, jwt }
+        return {
+            statusCode: 200,
+            ok: true,
+            user,
+            token
+        };
     }
     catch (error) {
         yield config_1.db.disconnect();
-        // TODO: Return possible errors
     }
 });
 exports.default = authLoginModule;

@@ -12,37 +12,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const bcryptjs_1 = __importDefault(require("bcryptjs"));
+// Config
+const config_1 = require("../../../config");
 // Utils
 const utils_1 = require("../../../utils");
-const authLoginModule_1 = __importDefault(require("../modules/authLoginModule"));
 /**
- * Handler description
+ * Service Desciption
  *
- * PATH: /api/...
- * AUTH-REQUIRED: false
- * ADMIN-REQUIRED: false
- *
- * @param { Object } req - The HTTP request object.
- * @param { Object } res - The HTTP response object.
- * @returns { void }
+ * @param {String} email - Express request object containing query parameters
+ * @returns {Object} - An object containing the total count of products and an array of products
  */
-const authLoginController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const checkValidPasswordService = (bodyPassword, userPassword) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { statusCode, ok, message, user, token } = yield (0, authLoginModule_1.default)(req);
-        res.status(statusCode).json({
-            ok,
-            message,
-            user,
-            token
-        });
+        const validPassword = bcryptjs_1.default.compareSync(bodyPassword, userPassword);
+        return (validPassword)
+            ? true
+            : false;
     }
     catch (error) {
-        utils_1.logger.consoleErrorsHandler(error, 'authLoginController');
-        res.status(500).json({
-            ok: false,
-            msg: 'Something went wrong. Talking the Administrator'
-        });
+        yield config_1.db.disconnect();
+        utils_1.logger.consoleErrorsHandler(error, 'checkValidPasswordService');
     }
 });
-exports.default = authLoginController;
-//# sourceMappingURL=authLoginController.js.map
+exports.default = checkValidPasswordService;
+//# sourceMappingURL=checkValidPasswordService.js.map

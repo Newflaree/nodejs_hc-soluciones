@@ -16,6 +16,10 @@ router.post('/register', [
     middlewares_1.validateFields
 ], controllers_1.authRegisterController);
 // PATH: /api/auth/login
-router.post('/login', controllers_1.authLoginController);
+router.post('/login', [
+    (0, express_validator_1.check)('email', 'La dirección de correo es un campo requerido').isEmail(),
+    (0, express_validator_1.check)('password', 'La contraseña debe ser de mínimo 6 carácteres').isLength({ min: 6 }),
+    middlewares_1.validateFields
+], controllers_1.authLoginController);
 exports.default = router;
 //# sourceMappingURL=authRoutes.js.map
