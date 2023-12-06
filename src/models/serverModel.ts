@@ -7,7 +7,8 @@ import { ApiPaths } from '../interfaces';
 // Routes
 import {
   authRoutes,
-  narratorsRoutes
+  narratorsRoutes,
+  seedRoutes
 } from '../entities/routes';
 // Utils
 import { logger } from '../utils';
@@ -23,7 +24,8 @@ class Server {
     this.port = process.env.PORT || '3002';
     this.apiPaths = {
       auth: '/api/auth',
-      narrators: '/api/narrators'
+      narrators: '/api/narrators',
+      seed: '/api/seed'
     }
 
     // Initial methods
@@ -39,6 +41,7 @@ class Server {
   routes() {
     this.app.use( this.apiPaths.auth, authRoutes );
     this.app.use( this.apiPaths.narrators, narratorsRoutes );
+    this.app.use( this.apiPaths.seed, seedRoutes );
   }
 
   listen() {
