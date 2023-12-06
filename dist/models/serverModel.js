@@ -16,7 +16,8 @@ class Server {
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || '3002';
         this.apiPaths = {
-            auth: '/api/auth'
+            auth: '/api/auth',
+            narrators: '/api/narrators'
         };
         // Initial methods
         this.middlewares();
@@ -28,6 +29,7 @@ class Server {
     }
     routes() {
         this.app.use(this.apiPaths.auth, routes_1.authRoutes);
+        this.app.use(this.apiPaths.narrators, routes_1.narratorsRoutes);
     }
     listen() {
         this.app.listen(this.port, () => {

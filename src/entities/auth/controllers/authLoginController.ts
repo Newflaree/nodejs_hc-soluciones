@@ -2,10 +2,11 @@
 import {
   Request,
   Response
-} from "express";
+} from 'express';
+// Modules
+import { authLoginModule } from '../modules';
 // Utils
-import {logger} from "../../../utils";
-import authLoginModule from "../modules/authLoginModule";
+import { logger } from '../../../utils';
 
 
 /**

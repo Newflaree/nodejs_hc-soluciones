@@ -9,11 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const models_1 = require("../models");
-const config_1 = require("../../../config");
-const utils_1 = require("../../../utils");
 // Database
+const config_1 = require("../../../config");
 // Models
+const models_1 = require("../models");
+// Utils
+const utils_1 = require("../../../utils");
 /**
  * Service Desciption
  *

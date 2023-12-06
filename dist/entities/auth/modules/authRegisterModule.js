@@ -62,7 +62,7 @@ const authRegisterModule = (req) => __awaiter(void 0, void 0, void 0, function* 
         return {
             statusCode: 400,
             ok: false,
-            error: error
+            error
         };
     }
 });

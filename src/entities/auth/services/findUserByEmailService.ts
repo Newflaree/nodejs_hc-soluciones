@@ -1,9 +1,9 @@
-import {User} from "../models";
-import {db} from "../../../config";
-import {logger} from "../../../utils";
 // Database
+import { db } from '../../../config';
 // Models
-
+import { User } from '../models';
+// Utils
+import { logger } from '../../../utils';
 
 
 /**

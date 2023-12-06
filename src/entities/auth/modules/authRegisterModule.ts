@@ -74,7 +74,7 @@ const authRegisterModule = async (
     return {
       statusCode: 400,
       ok: false,
-      error: error
+      error
     }
   }
 }

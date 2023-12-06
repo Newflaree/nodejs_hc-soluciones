@@ -8,13 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
+// Modules
+const modules_1 = require("../modules");
 // Utils
 const utils_1 = require("../../../utils");
-const authLoginModule_1 = __importDefault(require("../modules/authLoginModule"));
 /**
  * Handler description
  *
@@ -28,7 +26,7 @@ const authLoginModule_1 = __importDefault(require("../modules/authLoginModule"))
  */
 const authLoginController = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { statusCode, ok, message, user, token } = yield (0, authLoginModule_1.default)(req);
+        const { statusCode, ok, message, user, token } = yield (0, modules_1.authLoginModule)(req);
         res.status(statusCode).json({
             ok,
             message,

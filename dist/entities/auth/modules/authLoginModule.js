@@ -14,8 +14,8 @@ const config_1 = require("../../../config");
 // Interfaces
 // Services
 const services_1 = require("../services");
-const utils_1 = require("../../../utils");
 // Utils
+const utils_1 = require("../../../utils");
 // TODO: Write doc for login module
 const authLoginModule = (req
 // TODO: Added auth login response interface
@@ -39,7 +39,7 @@ const authLoginModule = (req
                 ok: false,
                 message: 'Correo electrónico o contraseña incorrectos'
             };
-        // TODO: Check if password is valid
+        // Check if password is valid
         const validPassword = yield (0, services_1.checkValidPasswordService)(password, user.password);
         if (!validPassword)
             return {
@@ -47,7 +47,7 @@ const authLoginModule = (req
                 ok: false,
                 message: 'Correo electrónico o contraseña incorrectos'
             };
-        // TODO: Genreate JsonWebToken
+        // Genreate JsonWebToken
         const token = yield (0, utils_1.generateJWT)(user._id);
         // Return { statusCode, ok, validUser, jwt }
         return {

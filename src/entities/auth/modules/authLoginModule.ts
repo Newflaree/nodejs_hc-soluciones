@@ -9,8 +9,8 @@ import {
   checkValidPasswordService,
   findUserByEmailService
 } from '../services';
-import {generateJWT} from '../../../utils';
 // Utils
+import { generateJWT } from '../../../utils';
 
 
 // TODO: Write doc for login module
@@ -25,13 +25,11 @@ const authLoginModule = async (
     // Check if user exists
     const { user } = await findUserByEmailService( email );
 
-
     if ( !user ) return {
       statusCode: 401,
       ok: false,
       message: 'Correo electrónico o contraseña incorrectos'
     }
-
 
     // Check if user is active
     const userIsBlocked = await checkUserBlockedService( email );
@@ -42,7 +40,7 @@ const authLoginModule = async (
       message: 'Correo electrónico o contraseña incorrectos'
     }
 
-    // TODO: Check if password is valid
+    // Check if password is valid
     const validPassword = await checkValidPasswordService( password, user.password );
 
     if ( !validPassword ) return {
@@ -51,7 +49,7 @@ const authLoginModule = async (
       message: 'Correo electrónico o contraseña incorrectos'
     }
 
-    // TODO: Genreate JsonWebToken
+    // Genreate JsonWebToken
     const token = await generateJWT( user._id );
 
     // Return { statusCode, ok, validUser, jwt }

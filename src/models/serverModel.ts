@@ -5,7 +5,10 @@ import cors from 'cors';
 // Interfaces
 import { ApiPaths } from '../interfaces';
 // Routes
-import { authRoutes } from '../entities/routes';
+import {
+  authRoutes,
+  narratorsRoutes
+} from '../entities/routes';
 // Utils
 import { logger } from '../utils';
 
@@ -19,7 +22,8 @@ class Server {
     this.app = express();
     this.port = process.env.PORT || '3002';
     this.apiPaths = {
-      auth: '/api/auth'
+      auth: '/api/auth',
+      narrators: '/api/narrators'
     }
 
     // Initial methods
@@ -34,6 +38,7 @@ class Server {
 
   routes() {
     this.app.use( this.apiPaths.auth, authRoutes );
+    this.app.use( this.apiPaths.narrators, narratorsRoutes );
   }
 
   listen() {

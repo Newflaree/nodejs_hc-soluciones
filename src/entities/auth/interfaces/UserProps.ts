@@ -1,3 +1,11 @@
+import { Document, Model } from 'mongoose';
+
+
+interface Location {
+  latitude: number;
+  longitude: number;
+};
+
 export interface UserProps {
   name: string;
   email: string;
@@ -13,10 +21,10 @@ export interface UserProps {
   applicationStatus: any;
 }
 
-interface Location {
-  latitude: number;
-  longitude: number;
-};
+export interface UserDocument extends Document, UserProps {}
 
+export interface UserModel extends Model<UserDocument> {
+  findNearestNarrators( latitude: number, longitude: number ): Promise<UserDocument[]>
+}
 
 type Roles = 'USER_ROLE' | 'NARRATOR_ROLE' | 'ADMIN_ROLE';
